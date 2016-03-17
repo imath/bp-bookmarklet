@@ -21,7 +21,7 @@ class BP_BKMKLET_Component extends BP_Component {
 	 * @uses setup_globals() to register some global vars
 	 * @uses buddypress() to reference the component as active
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->slug = bkmklet_get_slug();
 		$this->has_directory = true;
 		parent::start(
@@ -40,11 +40,12 @@ class BP_BKMKLET_Component extends BP_Component {
 	 *
 	 * @uses BP_Component::includes()
 	 */
-	function includes() {
+	public function includes( $includes = array() ) {
 		$includes = array(
 			'screens.php',
 			'widget.php'
 		);
+
 		parent::includes( $includes );
 	}
 	
@@ -55,7 +56,7 @@ class BP_BKMKLET_Component extends BP_Component {
 	 * @uses bkmklet_get_slug() to get plugin's slug
 	 * @uses BP_Component::setup_globals()
 	 */
-	function setup_globals() {
+	public function setup_globals( $args = array() ) {
 		$bp = buddypress();
 
 		$globals = array(

@@ -9,11 +9,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @uses is_multisite() to check WordPress config and eventually abort if not on root blog
  */
 function bp_bookmarklet_register_widget() {
-	global $blog_id;
-	
 	/* only for root blog !*/
-	if( is_multisite() && BP_ROOT_BLOG != $blog_id )
+	if ( is_multisite() && ! bp_is_root_blog() ) {
 		return false;
+	}
 	
 	add_action( 'bp_widgets_init', create_function('', 'return register_widget("BP_Bookmarklet_Widget");' ) );
 	
@@ -29,16 +28,6 @@ add_action( 'bp_loaded', 'bp_bookmarklet_register_widget', 9 );
  * @package BP Bookmarklet
  */
 class BP_Bookmarklet_Widget extends WP_Widget {
-	
-	/**
-	 * Loads the constructor
-	 *
-	 * @uses self::__construct()
-	 */
-	function bp_bookmarklet_widget() {
-		$this->__construct();
-	}
-	
 	/**
 	 * The constructor : defines the widget's settings
 	 *
