@@ -64,3 +64,17 @@ function bp_bookmarklet_activity_admin_preview_metabox( $item )  {
 
 	printf( '<div id="buddypress">%s</div>', $bookmark );
 }
+
+/**
+ * Upgrade plugin
+ *
+ * @since  3.0.0
+ */
+function bp_bookmarklet_upgrade() {
+	$db_version = bp_get_option( 'bp-bookmarklet-version', 0 );
+
+	if ( version_compare( $db_version, bp_bookmarklet()->version, '<' ) ) {
+		bp_update_option( 'bp-bookmarklet-version', bp_bookmarklet()->version );
+	}
+}
+add_action( 'bp_admin_init', 'bp_bookmarklet_upgrade', 1200 );
