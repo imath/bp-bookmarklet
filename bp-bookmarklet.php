@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BP BookMarklet
  * Plugin URI: http://imathi.eu/tag/bp-bookmarklet/
- * Description: Allows your member to add a bookmarklet to their browser to easily share links in your BuddyPress powered community 
+ * Description: Allows your member to add a bookmarklet to their browser to bookmark sites in your BuddyPress powered community
  * Version: 3.0.0
  * Requires at least: 4.4
  * Tested up to: 4.5
@@ -23,9 +23,9 @@ if ( ! class_exists( 'BP_Bookmarklet' ) ) :
  * @package BP Bookmarklet
  */
 final class BP_Bookmarklet {
-	
+
 	private static $instance = null;
-	
+
 	/**
 	 * Make sure the instance is load once
 	 */
@@ -35,7 +35,7 @@ final class BP_Bookmarklet {
 	    }
 	    return self::$instance;
 	}
-	
+
 	/**
 	 * The constructor
 	 */
@@ -44,7 +44,7 @@ final class BP_Bookmarklet {
 		$this->includes();
 		$this->setup_hooks();
 	}
-	
+
 	/**
 	 * Registers plugin's globals
 	 */
@@ -52,7 +52,7 @@ final class BP_Bookmarklet {
 
 		/** Version ***********************************************************/
 
-		$this->version    = '3.0.0';
+		$this->version = '3.0.0';
 
 		$this->required_versions = array(
 			'wp' => 4.4,
@@ -63,29 +63,26 @@ final class BP_Bookmarklet {
 
 		// Setup some base path and URL information
 		$this->file       = __FILE__;
-		$this->basename   = apply_filters( 'bkmklet_plugin_basename',  plugin_basename( $this->file ) );
-		$this->plugin_dir = apply_filters( 'bkmklet_plugin_dir_path',  plugin_dir_path( $this->file ) );
-		$this->plugin_url = apply_filters( 'bkmklet_plugin_dir_url',   plugin_dir_url ( $this->file ) );
+		$this->basename   = plugin_basename( $this->file );
+		$this->plugin_dir = plugin_dir_path( $this->file );
+		$this->plugin_url = plugin_dir_url ( $this->file );
 
-		// Includes
-		$this->includes_dir  = apply_filters( 'bkmklet_includes_dir',  trailingslashit( $this->plugin_dir . 'includes'   ) );
-		$this->includes_url  = apply_filters( 'bkmklet_includes_url',  trailingslashit( $this->plugin_url . 'includes'   ) );
-		$this->css_url       = apply_filters( 'bkmklet_includes_url',  trailingslashit( $this->plugin_url . 'css'        ) );
-		$this->js_url        = apply_filters( 'bkmklet_includes_url',  trailingslashit( $this->plugin_url . 'js'         ) );
-		$this->templates_dir = apply_filters( 'bkmklet_templates_dir', trailingslashit( $this->plugin_dir . 'templates'  ) );
+		// Paths & Urls
+		$this->includes_dir  = trailingslashit( $this->plugin_dir . 'includes' );
+		$this->includes_url  = trailingslashit( $this->plugin_url . 'includes' );
+		$this->css_url       = trailingslashit( $this->plugin_url . 'css'      );
+		$this->js_url        = trailingslashit( $this->plugin_url . 'js'       );
+		$this->templates_dir = $this->plugin_dir . 'templates';
 
 		// Languages
-		$this->lang_dir = apply_filters( 'bkmklet_lang_dir', trailingslashit( $this->plugin_dir . 'languages' ) );
-		
-		// slug and name
-		$this->bkmklet_slug = apply_filters( 'bkmklet_slug', 'bookmarklet' );
-		$this->bkmklet_name = apply_filters( 'bkmklet_name', 'Bookmarklet' );
+		$this->lang_dir = apply_filters( 'bp_bookmarklet_lang_dir', trailingslashit( $this->plugin_dir . 'languages' ) );
 
 
 		/** Misc **************************************************************/
-
-		$this->domain         = 'bp-bookmarklet';
-		$this->errors         = new WP_Error(); // Feedback
+		$this->domain               = 'bp-bookmarklet';
+		$this->minified             = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$this->is_bookmarklet_frame = false;
+		$this->prepended            = array();
 	}
 
 	/**
@@ -94,21 +91,20 @@ final class BP_Bookmarklet {
 	private function bail() {
 		$return = false;
 
-		$wp_version = 0;
+		$this->wp_version = 0;
 		if ( isset( $GLOBALS['wp_version'] ) ) {
-			$wp_version = (float) $GLOBALS['wp_version'];
+			$this->wp_version = (float) $GLOBALS['wp_version'];
 		}
 
-		if ( $this->required_versions['wp'] > $wp_version || $this->required_versions['bp'] > (float) bp_get_version() || ! bp_is_active( 'activity') ) {
+		if ( $this->required_versions['wp'] > $this->wp_version || $this->required_versions['bp'] > (float) bp_get_version() || ! bp_is_active( 'activity') ) {
 			$return = true;
 		}
 
 		return $return;
 	}
-	
+
 	/**
 	 * Includes the needed files
-	 *
 	 */
 	private function includes() {
 		if ( $this->bail() ) {
@@ -116,52 +112,207 @@ final class BP_Bookmarklet {
 		}
 
 		require( $this->includes_dir . 'functions.php' );
-		require( $this->includes_dir . 'images.php'    );
 		require( $this->includes_dir . 'component.php' );
+
+		if ( is_admin() ) {
+			require( $this->includes_dir . 'admin.php' );
+		}
 	}
-	
+
 	/**
-	 * Fires some hooks to extend BuddyPress with plugin's functionalities
-	 *
+	 * Setup Hooks if the config match requirements
 	 */
 	private function setup_hooks() {
 		if ( $this->bail() ) {
-			return;
+			add_action( $this->is_network_active() ? 'network_admin_notices' : 'admin_notices', array( $this, 'warnings' ) );
+
+		// load the plugin.
 		} else {
-			//loads the scripts after BuddyPress has loaded his
-			add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			
-			//Adds extra html in member's profile header to display the bookmarklet button
-			add_action( 'bp_profile_header_meta', 'bkmklet_profile_header_bookmarklet' );
-			
-			//Adds a checkbox to the activity post form to let user attach link's images
-			add_action( 'bp_activity_post_form_options', 'bkmklet_activity_post_option' );
-			
-			//Filters the content before save to include the image in the content
-			add_filter( 'bp_activity_new_update_content', 'bkmklet_activity_new_update_content', 10, 1 );
-			
-			//Forces image height to avoid full/max width images in activity stream
-			add_action( 'wp_head', 'bkmklet_force_image_height', 99 );
-			
-			//Removes the plugin's directory page from blog's default menu
-			add_filter( 'wp_page_menu_args', 'bkmklet_hide_directory_page', 20, 1 );
+			// Register the template directory
+			add_action( 'bp_register_theme_directory', array( $this, 'register_template_dir' )    );
+
+			// Register css & js
+			add_action( 'bp_bookmarklet_frame_head',   array( $this, 'register_cssjs' ),  1 );
+			add_action( 'bp_bookmarklet_frame_footer', 'wp_print_footer_scripts',        20 );
+
+			// Set and locate the Bookmarklet Frame
+			add_action( 'bp_init',             array( $this, 'set_frame'    ),     3 );
+			add_filter( 'bp_located_template', array( $this, 'locate_frame' ), 10, 2 );
+
+			// Make sure we will be the only one to use the slug 'bp-bookmarklet-frame'
+			add_filter( 'groups_forbidden_names',    array( $this, 'restricted_name' ), 10, 1 );
+			add_filter( 'site_option_illegal_names', array( $this, 'restricted_name' ), 10, 1 );
 		}
-		
+
 		//Loads the translation
 		add_action( 'bp_init', array( $this, 'load_textdomain' ), 6 );
 	}
-	
+
 	/**
-	 * Enqueues Scripts if on logged in member's profile pages
+	 * Is the plugin active for network ?
+	 *
+	 * @since 3.0.0
 	 */
-	public function enqueue_scripts() {
-		if( bp_is_my_profile() && !bkmklet_is_widget_loaded() ) {
-			wp_enqueue_style( 'bp-bkmk-widget-style', bkmklet_get_css_url() . 'bkmk-button.css', false, bkmklet_get_version() );
-			wp_enqueue_script( 'bookmarklet-button-js', bkmklet_get_js_url() .'bookmarklet-button.js', array( 'jquery'), bkmklet_get_version(), true );
-			wp_localize_script('bookmarklet-button-js', 'bookmarklet_button_vars', array(
-						'drag_message' => __('Just drag the button to your Bookmarks Toolbar!', 'bp-bookmarklet' )
-			));
+	public function is_network_active() {
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			return false;
 		}
+
+		return is_plugin_active_for_network( $this->basename );
+	}
+
+	/**
+	 * Required configuration notices
+	 *
+	 * @since 3.0.0
+	 */
+	public function warnings() {
+		$warnings = array();
+
+		if ( $this->required_versions['wp'] > $this->wp_version ) {
+			$warnings[] = sprintf(
+				esc_html__( 'BP Bookmarklet %1$s requires at least version %2$s of WordPress.', 'bp-bookmarklet' ),
+				$this->version,
+				$this->required_versions['wp']
+			);
+		}
+
+		if ( $this->required_versions['bp'] > (float) bp_get_version() ) {
+			$warnings[] = sprintf(
+				esc_html__( 'BP Bookmarklet %1$s requires at least version %2$s of BuddyPress.', 'bp-bookmarklet' ),
+				$this->version,
+				$this->required_versions['bp']
+			);
+		}
+
+		if ( ! bp_is_active( 'activity' ) ) {
+			$warnings[] = sprintf(
+				esc_html__( 'BP Bookmarklet %s requires the BuddyPress Activity component to be active.', 'bp-bookmarklet' ),
+				$this->version
+			);
+		}
+
+		if ( ! empty( $warnings ) ) : ?>
+
+			<div id="message" class="error">
+				<?php foreach ( $warnings as $warning ) : ?>
+					<p><?php echo $warning; ?></p>
+				<?php endforeach ; ?>
+			</div>
+
+		<?php endif;
+	}
+
+	/**
+	 * Register our template dir into the BuddyPress stack
+	 *
+	 * @since 3.0.0
+	 */
+	public function register_template_dir() {
+		bp_register_template_stack( array( $this, 'template_dir' ),  20 );
+	}
+
+	/**
+	 * Get the template dir
+	 *
+	 * @since 1.0.0
+	 */
+	public function template_dir() {
+		if ( ! $this->is_bookmarklet_frame ) {
+			return;
+		}
+
+		return apply_filters( 'bp_bookmarklet_templates_dir', $this->templates_dir );
+	}
+
+	/**
+	 * Set the Bookmarklet frame if needed
+	 *
+	 * @since 3.0.0
+	 */
+	public function set_frame() {
+		$bp = buddypress();
+
+		if ( isset( $bp->unfiltered_uri ) && array_search( 'bp-bookmarklet-frame', $bp->unfiltered_uri ) ) {
+			$this->is_bookmarklet_frame = true;
+
+			// No Admin Bar into the Bookmarklet frame!
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
+	}
+
+	/**
+	 * Locate the Bookmarklet frame if needed
+	 *
+	 * @since 3.0.0
+	 */
+	public function locate_frame( $located = '', $filtered = array() ) {
+		if ( $this->is_bookmarklet_frame ) {
+			$located = bp_locate_template( reset( $filtered ) );
+		}
+
+		return $located;
+	}
+
+	/**
+	 * Register Scripts and styles
+	 *
+	 * @since 3.0.0
+	 */
+	public function register_cssjs() {
+		// Style
+		wp_register_style(
+			'bp-bookmarklet-style',
+			$this->css_url . "style{$this->minified}.css",
+			array( 'dashicons' ),
+			$this->version
+		);
+
+		// JS
+		wp_register_script(
+			'bp-bookmarklet-script',
+			$this->js_url . "script{$this->minified}.js",
+			array( 'jquery', 'json2', 'wp-backbone' ),
+			$this->version,
+			true
+		);
+	}
+
+	/**
+	 * Enqueues the script and style for the User's Bookmarklet
+	 * screen.
+	 *
+	 * @since 3.0.0
+	 */
+	public function enqueue_button_cssjs() {
+		wp_enqueue_style(
+			'bp-bookmarklet-button-style',
+			$this->css_url . "button{$this->minified}.css",
+			array( 'dashicons' ),
+			$this->version
+		);
+
+		// JS
+		wp_enqueue_script(
+			'bp-bookmarklet-button-script',
+			$this->js_url . "button{$this->minified}.js",
+			array( 'jquery' ),
+			$this->version,
+			true
+		);
+	}
+
+	/**
+	 * Add a restricted name
+	 *
+	 * @since 3.0.0
+	 */
+	public function restricted_name( $names = array() ) {
+		if ( ! in_array( 'bp-bookmarklet-frame', $names ) ) {
+			$names = array_merge( $names, array( 'bp-bookmarklet-frame' ) );
+		}
+
+		return $names;
 	}
 
 	/**
@@ -181,6 +332,9 @@ final class BP_Bookmarklet {
 
 		// Look in local /wp-content/plugins/bp-bookmarklet/languages/ folder
 		load_textdomain( $this->domain, $mofile_local );
+
+		// Look in global /wp-content/languages/plugins/
+		load_plugin_textdomain( $this->domain );
 	}
 }
 endif;
