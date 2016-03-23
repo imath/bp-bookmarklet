@@ -147,7 +147,7 @@ final class BP_Bookmarklet {
 		}
 
 		//Loads the translation
-		add_action( 'bp_init', array( $this, 'load_textdomain' ), 6 );
+		add_action( 'bp_init', array( $this, 'load_textdomain' ), 5 );
 	}
 
 	/**

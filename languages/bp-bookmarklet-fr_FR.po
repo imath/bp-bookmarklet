@@ -6,128 +6,144 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BP BookMarklet 1.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-bookmarklet\n"
-"POT-Creation-Date: 2013-05-27 06:10:41+00:00\n"
-"PO-Revision-Date: 2013-05-27 08:11+0100\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bp-bookmarklet\n"
+"POT-Creation-Date: 2016-03-23 17:16:01+00:00\n"
+"PO-Revision-Date: 2016-03-23 18:38+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.7.1\n"
 
-#: bp-bookmarklet.php:155 includes/widget.php:68
-msgid "Just drag the button to your Bookmarks Toolbar!"
-msgstr "Merci de glisser déposer ce bouton dans votre barre de favoris!"
+#: bp-bookmarklet.php:176
+msgid "BP Bookmarklet %1$s requires at least version %2$s of WordPress."
+msgstr "BP Bookmarklet %1$s nécessite à minima la version %2$s de WordPress."
 
-#: bp-bookmarklet.php:227
+#: bp-bookmarklet.php:184
+msgid "BP Bookmarklet %1$s requires at least version %2$s of BuddyPress."
+msgstr "BP Bookmarklet %1$s requiert à minima la version %2$s de BuddyPress."
+
+#: bp-bookmarklet.php:192
 msgid ""
-"Well.. BP Bookmarklet is a BuddyPress activity plugin.. So it needs this "
-"component to be activated"
+"BP Bookmarklet %s requires the BuddyPress Activity component to be active."
 msgstr ""
-"Hum.. BP Bookmarklet est un plugin qui requiert que le composant Activités "
-"de BuddyPress soit activé."
+"BP Bookmarklet %s requiert que le composant des Activités de BuddyPress soit "
+"activé."
 
-#: includes/functions.php:97
-msgid ""
-"BP Bookmarklet uses this page, please leave it as is. It will not show in "
-"your navigation bar."
-msgstr ""
-"BP Bookmarklet utilise cette page, merci de ne pas y toucher. Elle sera "
-"automatiquement masquée de la navigation de votre site."
+#: includes/class.php:27
+msgid "A valid URL was not provided."
+msgstr "Veuillez indiquer une URL valide."
 
-#: includes/functions.php:193
-msgid "Please log in %s"
-msgstr "Merci de vous connecter sur %s"
-
-#: includes/functions.php:196 includes/functions.php:238
-msgid "Share on %s"
-msgstr "Partager sur %s"
-
-#: includes/functions.php:220
-msgid "Show the bookmarklet"
-msgstr "Afficher le bookmarklet"
-
-#: includes/functions.php:220
-msgid "What about adding a bookmarklet in your browser bookmarks toolbar ?"
-msgstr "Et si vous ajoutiez un bookmarklet à votre navigateur ?"
-
-#: includes/functions.php:222
-msgid ""
-"To simply share content/links in your profile or group updates, just drag "
-"the button to your Bookmarks Toolbar!"
-msgstr ""
-"Afin de très simplement partager des liens et des contenus dans votre "
-"activité ou celle de vos groupes, il suffit de glisser déposer le bouton ci-"
-"dessous dans votre barre de favoris!"
-
-#: includes/functions.php:253
-msgid "Share on"
-msgstr "Partager sur"
-
-#: includes/functions.php:266
-msgid "Attach image"
-msgstr "Attacher image"
-
-#: includes/functions.php:306
-msgid "Thumbnail"
-msgstr "Vignette"
-
-#: includes/images.php:15
-msgid "OOops, you forgot to add the url"
-msgstr "OOps, vous avez oublié de renseigner une url"
-
-#: includes/images.php:27
-msgid "OOps, something went wrong :("
-msgstr "Oops, une erreur est survenue :("
-
-#: includes/screens.php:116
-msgid "[Your content here]"
-msgstr "[Votre contenu ici]"
-
-#: includes/screens.php:117
-msgid "Success, link shared!"
-msgstr "Bravo, votre lien est partagé."
-
-#: includes/screens.php:118
-msgid "Loading the images, please wait.."
-msgstr "Chargement des images en cours, merci de patienter"
-
-#: includes/screens.php:119
-msgid "Sorry no images were found"
-msgstr "Désolé, pas d&#39;image exploitable."
-
-#: includes/screens.php:120
-msgid "Use the arrows to select the image"
-msgstr "Utilisez les flèches pour choisir votre image"
-
-#: includes/widget.php:48
-msgid ""
-"A Bookmarklet Widget to allow your member to easily share content in "
-"activity stream."
-msgstr ""
-"Un Widget pour ajouter un bookmarklet à vos membres pour leur simplifier le "
-"partage de contenu dans leur activity stream"
-
-#: includes/widget.php:49 includes/widget.php:134
+#: includes/component.php:23
 msgid "Bookmarklet"
 msgstr "Bookmarklet"
 
-#: includes/widget.php:143
-msgid "Title:"
-msgstr "Titre:"
+#: includes/component.php:171
+msgid ""
+"Drag the bookmarklet below to your bookmarks bar. Then, when you&#8217;re on "
+"a page you want to share, simply &#8220;Bookmark&#8221; it."
+msgstr ""
+"Faites glisser le bookmarklet ci-dessous au sein de votre barre de signets. "
+"Alors, quand vous naviguerez sur une page que vous souhaitez partager, "
+"cliquez simplement sur &#8220; Ajouter aux signets &#8221;."
 
-#: includes/widget.php:145
-msgid "Show only on loggedin members profile:"
-msgstr "Afficher uniquement sur les profils des membres loggés:"
+#: includes/component.php:174
+msgid "Bookmark on %s"
+msgstr "Ajouter aux signets de %s"
 
-#: includes/widget.php:146
-msgid "Yes"
-msgstr "Oui"
+#: includes/component.php:177
+msgid "Copy &#8220;Bookmarklet This&#8221; code"
+msgstr "Copier le code du bookmarklet &#8220;Ajouter aux signets&#8221;"
 
-#: includes/widget.php:147
-msgid "No"
-msgstr "Non"
+#: includes/component.php:183
+msgid ""
+"If you can&#8217;t drag the bookmarklet to your bookmarks, copy the "
+"following code and create a new bookmark. Paste the code into the new "
+"bookmark&#8217;s URL field."
+msgstr ""
+"Si vous ne pouvez pas glissez le bookmarklet dans votre barre de signets, "
+"copier le code qui suit et créer un nouveau signet. Coller le code dans le "
+"champ URL de ce nouveau signet."
+
+#: includes/functions.php:130
+msgid "Profile photo of %s"
+msgstr "Photo du profil de %s"
+
+#: includes/functions.php:137
+msgid "Post in: Profile"
+msgstr "Publier dans votre profil"
+
+#: includes/functions.php:146
+msgid "Post in: Group"
+msgstr "Publier dans un groupe"
+
+#: includes/functions.php:147
+msgid "Start typing the group name..."
+msgstr "Commencez à saisir un nom de groupe..."
+
+#: includes/functions.php:155
+msgid "What's new, %s?"
+msgstr "Quoi de neuf, %s ?"
+
+#: includes/functions.php:156
+msgid "Post what's new"
+msgstr "Publiez de vos nouvelles"
+
+#: includes/functions.php:157
+msgid "Error: the bookmark cannot be published."
+msgstr "Erreur: le signet ne peut être publié."
+
+#: includes/functions.php:158
+msgid "Error: the bookmark cannot be published for the selected item."
+msgstr "Erreur: le signet ne peut être publié dans le groupe sélectionné."
+
+#: includes/functions.php:176
+msgid "Bookmarked a site"
+msgstr "Ajouter un site aux signets"
+
+#: includes/functions.php:178
+msgid "Bookmarks"
+msgstr "Signets"
+
+#: includes/functions.php:223 includes/functions.php:478
+msgid "%1$s bookmarked a new site in the group %2$s"
+msgstr "%1$s a ajouté un nouveau site aux signets du groupe %2$s"
+
+#: includes/functions.php:228 includes/functions.php:460
+msgid "%s bookmarked a new site"
+msgstr "%s a ajouté un nouveau site à ses signets"
+
+#: includes/functions.php:408
+msgid "No items were found."
+msgstr "Désolé, aucun élément disponible."
+
+#: includes/functions.php:424
+msgid "There was a problem publishing your bookmark. Please try again."
+msgstr ""
+"Une erreur s&#39.est produite lors de la publication de votre signet. "
+"Veuillez recommencer."
+
+#: includes/functions.php:464
+msgid "To publish a bookmark in this group, you must be a member of it."
+msgstr "Pour publier un signer dans ce groupe, vous devez en être membre."
+
+#: includes/functions.php:483
+msgid "Unknown group"
+msgstr "Groupe Inconnu"
+
+#: includes/functions.php:511
+msgid "Success! Bookmark published."
+msgstr "Succès: le signet a été publié."
+
+#: templates/activity/bookmarklet-form.php:28
+msgid "Close"
+msgstr "Fermer"
+
+#: templates/activity/bookmarklet-form.php:57
+msgid "Remove item"
+msgstr "Supprimer l&#39;élément"
 
 #. Plugin Name of the plugin/theme
 msgid "BP BookMarklet"
@@ -139,11 +155,11 @@ msgstr "http://imathi.eu/tag/bp-bookmarklet/"
 
 #. Description of the plugin/theme
 msgid ""
-"Allows your member to add a bookmarklet to their browser to easily share "
-"links in your BuddyPress powered community"
+"Allows your member to add a bookmarklet to their browser to bookmark sites "
+"in your BuddyPress powered community"
 msgstr ""
-"Permettez à vos membres d&#39;utiliser un bookmarklet pour leur simplifier "
-"le partage de lien dans votre communauté BuddyPress"
+"Permettez à vos membres d&#39;utiliser un bookmarklet pour partager des "
+"signets au sein de votre communauté BuddyPress."
 
 #. Author of the plugin/theme
 msgid "imath"
@@ -152,3 +168,114 @@ msgstr "imath"
 #. Author URI of the plugin/theme
 msgid "http://imathi.eu/"
 msgstr "http://imathi.eu/"
+
+#: includes/admin.php:34
+msgctxt "activity admin edit screen"
+msgid "Bookmark preview"
+msgstr "Prévisualisation du signet"
+
+#: includes/component.php:46
+msgctxt "Profile Bookmarklet screen nav"
+msgid "Bookmarklet"
+msgstr "Signets"
+
+#: includes/component.php:57
+msgctxt "Profile Bookmarklet screen sub nav"
+msgid "My bookmarklet"
+msgstr "Bouton d&#39;ajout de signets"
+
+#: includes/component.php:81
+msgctxt "Profile Bookmarklet settings nav"
+msgid "Bookmarklet"
+msgstr "Signets"
+
+#: includes/component.php:107
+msgctxt "Profile Bookmarklet admin bar nav"
+msgid "Bookmarklet"
+msgstr "Signets"
+
+#: includes/component.php:115
+msgctxt "Profile Bookmarklet admin bar sub nav"
+msgid "My bookmarklet"
+msgstr "Bouton d&#39;ajout de signets"
+
+#: includes/component.php:138
+msgctxt "Profile Bookmarklet settings admin bar"
+msgid "Bookmarklet"
+msgstr "Signets"
+
+#~ msgid "Just drag the button to your Bookmarks Toolbar!"
+#~ msgstr "Merci de glisser déposer ce bouton dans votre barre de favoris!"
+
+#~ msgid ""
+#~ "BP Bookmarklet uses this page, please leave it as is. It will not show in "
+#~ "your navigation bar."
+#~ msgstr ""
+#~ "BP Bookmarklet utilise cette page, merci de ne pas y toucher. Elle sera "
+#~ "automatiquement masquée de la navigation de votre site."
+
+#~ msgid "Please log in %s"
+#~ msgstr "Merci de vous connecter sur %s"
+
+#~ msgid "Share on %s"
+#~ msgstr "Partager sur %s"
+
+#~ msgid "Show the bookmarklet"
+#~ msgstr "Afficher le bookmarklet"
+
+#~ msgid "What about adding a bookmarklet in your browser bookmarks toolbar ?"
+#~ msgstr "Et si vous ajoutiez un bookmarklet à votre navigateur ?"
+
+#~ msgid ""
+#~ "To simply share content/links in your profile or group updates, just drag "
+#~ "the button to your Bookmarks Toolbar!"
+#~ msgstr ""
+#~ "Afin de très simplement partager des liens et des contenus dans votre "
+#~ "activité ou celle de vos groupes, il suffit de glisser déposer le bouton "
+#~ "ci-dessous dans votre barre de favoris!"
+
+#~ msgid "Share on"
+#~ msgstr "Partager sur"
+
+#~ msgid "Attach image"
+#~ msgstr "Attacher image"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Vignette"
+
+#~ msgid "OOops, you forgot to add the url"
+#~ msgstr "OOps, vous avez oublié de renseigner une url"
+
+#~ msgid "OOps, something went wrong :("
+#~ msgstr "Oops, une erreur est survenue :("
+
+#~ msgid "[Your content here]"
+#~ msgstr "[Votre contenu ici]"
+
+#~ msgid "Success, link shared!"
+#~ msgstr "Bravo, votre lien est partagé."
+
+#~ msgid "Loading the images, please wait.."
+#~ msgstr "Chargement des images en cours, merci de patienter"
+
+#~ msgid "Use the arrows to select the image"
+#~ msgstr "Utilisez les flèches pour choisir votre image"
+
+#~ msgid ""
+#~ "A Bookmarklet Widget to allow your member to easily share content in "
+#~ "activity stream."
+#~ msgstr ""
+#~ "Un Widget pour ajouter un bookmarklet à vos membres pour leur simplifier "
+#~ "le partage de contenu dans leur activity stream"
+
+#~ msgid "Title:"
+#~ msgstr "Titre:"
+
+#~ msgid "Show only on loggedin members profile:"
+#~ msgstr "Afficher uniquement sur les profils des membres loggés:"
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "No"
+#~ msgstr "Non"
