@@ -508,7 +508,7 @@ function bp_bookmarklet_post_update() {
 
 	bp_activity_add_meta( $activity_id, '_bookmarklet_data', $bookmarklet_data );
 
-	wp_send_json_success( array( 'message' => __( 'Success! Bookmark published.' ) ) );
+	wp_send_json_success( array( 'message' => __( 'Success! Bookmark published.', 'bp-bookmarklet' ) ) );
 }
 add_action( 'wp_ajax_bp_bookmarklet_post_update', 'bp_bookmarklet_post_update' );
 

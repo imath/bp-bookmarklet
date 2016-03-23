@@ -43,6 +43,8 @@ window.bp = window.bp || {};
 		 * @return {string|array} A specific or all parameters.
 		 */
 		getLinkParams: function( url, param ) {
+			var qs;
+
 			if ( url ) {
 				qs = ( -1 !== url.indexOf( '?' ) ) ? '?' + url.split( '?' )[1] : '';
 			} else {
@@ -54,7 +56,7 @@ window.bp = window.bp || {};
 			}
 
 			var params = qs.replace( /(^\?)/, '' ).split( '&' ).map( function( n ) {
-				return n = n.split( '=' ),this[n[0]] = n[1],this
+				return n = n.split( '=' ),this[n[0]] = n[1],this;
 			}.bind( {} ) )[0];
 
 			if ( param ) {
@@ -85,7 +87,7 @@ window.bp = window.bp || {};
 
 			return '';
 		}
-	}
+	};
 
 	if ( typeof bp.View === 'undefined' ) {
 		// Extend wp.Backbone.View with .prepare() and .inject()
@@ -166,7 +168,7 @@ window.bp = window.bp || {};
 				options = options || {};
 				options.context = this;
 				options.data = _.extend( options.data || {}, {
-					action: 'bp_bookmarklet_get_items',
+					action: 'bp_bookmarklet_get_items'
 				} );
 
 				return bp.ajax.send( options );
@@ -207,7 +209,7 @@ window.bp = window.bp || {};
 			if ( 'info' === this.type ) {
 				message = '<p>' + this.value + '</p>';
 			} else {
-				message = '<p class="' + this.type + '">' + this.value + '</p>'
+				message = '<p class="' + this.type + '">' + this.value + '</p>';
 			}
 			this.$el.html( message );
 			return this;
@@ -253,8 +255,6 @@ window.bp = window.bp || {};
 		},
 
 		resetContent: function( activity ) {
-			var h = this.$el.get( 0 ).scrollHeight;
-
 			if ( _.isUndefined( activity ) ) {
 				return;
 			}
@@ -392,7 +392,7 @@ window.bp = window.bp || {};
 		},
 
 		cleanView: function() {
-			_.each( this.views._views[""], function( view ) {
+			_.each( this.views._views[''], function( view ) {
 					view.remove();
 			} );
 		}
@@ -410,7 +410,7 @@ window.bp = window.bp || {};
 				'avatar_width',
 				'avatar_height',
 				'avatar_alt',
-				'user_domain',
+				'user_domain'
 			] ) );
 
 			if ( this.model.has( 'avatar_url' ) ) {
@@ -440,7 +440,7 @@ window.bp = window.bp || {};
 			}
 
 			// Clean up views
-			_.each( this.views._views[""], function( view ) {
+			_.each( this.views._views[''], function( view ) {
 				if ( ! _.isUndefined( view.collection ) ) {
 					view.remove();
 				}
@@ -532,7 +532,7 @@ window.bp = window.bp || {};
 		id       : 'bp-bookmarklet-link',
 
 		events: {
-			'blur #activity-link': 'loadContent',
+			'blur #activity-link': 'loadContent'
 		},
 
 		initialize: function() {
@@ -552,7 +552,7 @@ window.bp = window.bp || {};
 		},
 
 		setFocus: function() {
-			var isFrame = bp.BookMarklet.getLinkParams(), self = this;
+			var isFrame = bp.BookMarklet.getLinkParams(), self = this,
 				linkInput = this.$el.find( '#activity-link' );
 
 			if ( ! _.isUndefined( isFrame.url ) ) {
@@ -633,7 +633,7 @@ window.bp = window.bp || {};
 		refreshContent: function( model ) {
 			if ( ! model.get( 'title') ) {
 				// Clean up views
-				_.each( this.views._views[""], function( view ) {
+				_.each( this.views._views[''], function( view ) {
 					view.remove();
 				} );
 			}
@@ -652,7 +652,7 @@ window.bp = window.bp || {};
 		template:  bp.template( 'bookmark-link-output' ),
 
 		events: {
-			'click #bookmarklet-no-image': 'removeImage',
+			'click #bookmarklet-no-image': 'removeImage'
 		},
 
 		initialize: function() {
@@ -745,7 +745,7 @@ window.bp = window.bp || {};
 		},
 
 		displayFull: function() {
-			if ( 1 !== this.views._views[""].length || _.isUndefined( this.model.get( 'title' ) ) ) {
+			if ( 1 !== this.views._views[''].length || _.isUndefined( this.model.get( 'title' ) ) ) {
 				return;
 			}
 
@@ -760,7 +760,7 @@ window.bp = window.bp || {};
 		},
 
 		resetForm: function() {
-			_.each( this.views._views[""], function( view, index ) {
+			_.each( this.views._views[''], function( view, index ) {
 				if ( 0 !== index ) {
 					view.remove();
 				}
@@ -773,7 +773,7 @@ window.bp = window.bp || {};
 		},
 
 		clearFeedback: function() {
-			_.each( this.views._views[""], function( view, index ) {
+			_.each( this.views._views[''], function( view ) {
 				if ( 'message' === view.$el.prop( 'id' ) ) {
 					view.remove();
 				}
@@ -838,7 +838,7 @@ window.bp = window.bp || {};
 
 			// Set the nonce
 			var data = {
-				'_wpnonce_bookmarklet_create': BP_Bookmarklet.params.post_nonce,
+				'_wpnonce_bookmarklet_create': BP_Bookmarklet.params.post_nonce
 			};
 
 			// Submit
@@ -860,7 +860,9 @@ window.bp = window.bp || {};
 
 		maybeClose: function() {
 			if ( 'doclose' === bp.BookMarklet.getLinkParams( null, 'jump' ) ) {
-				setTimeout( 'window.close();', 1000 );
+				setTimeout( function() {
+					window.close();
+				}, 1000 );
 			}
 		}
 	} );

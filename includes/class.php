@@ -24,7 +24,7 @@ class BP_Bookmarklet_This extends WP_Press_This {
 		$version = bp_bookmarklet()->version;
 
 		if ( empty( $url ) ) {
-			return new WP_Error( 'invalid-url', __( 'A valid URL was not provided.' ) );
+			return new WP_Error( 'invalid-url', __( 'A valid URL was not provided.', 'bp-bookmarklet' ) );
 		}
 
 		$remote_url = wp_safe_remote_get( $url, array(

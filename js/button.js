@@ -10,6 +10,6 @@
 		var self = this;
 
 		setTimeout( function() { self.select(); }, 50 );
-	});
+	} );
 
 } )( jQuery );
