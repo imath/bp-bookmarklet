@@ -537,9 +537,10 @@ window.bp = window.bp || {};
 
 		initialize: function() {
 			var linkInput = new bp.Views.ActivityInput( {
-				type: 'text',
-				id: 'activity-link',
-				placeholder: 'http://'
+				type        : 'text',
+				id          : 'activity-link',
+				placeholder : 'http://',
+				readonly    : 'readonly'
 			} ).render();
 
 			this.$el.prepend( $( '<div></div>' ).html( linkInput.$el ) );
@@ -555,7 +556,14 @@ window.bp = window.bp || {};
 				linkInput = this.$el.find( '#activity-link' );
 
 			if ( ! _.isUndefined( isFrame.url ) ) {
-				_.mapObject( isFrame, function( attr, i ) {
+				/**
+				 * _.mapObject was introduced in Underscore 1.8
+				 * This version of underscore will be introduced in WordPress 4.5
+				 *
+				 * @todo when the required version of the plugin will be 4.5
+				 * Use _.mapObject instead of $.map
+				 */
+				$.map( isFrame, function( attr, i ) {
 					if ( -1 !== _.indexOf( ['title', 'description', 'copied'], i ) ) {
 						var attribute = i;
 

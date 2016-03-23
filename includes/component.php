@@ -119,20 +119,27 @@ class BP_Bookmarklet_Component extends BP_Component {
 
 			// Otherwise add a subnav to the settings component
 			} else {
-				add_filter( 'bp_settings_admin_nav', function( $settings_nav = array() ) {
-					$settings_nav[] = array(
-						'parent' => 'my-account-' . buddypress()->settings->id,
-						'id'     => 'my-account-' . $this->id,
-						'title'  => _x( 'Bookmarklet', 'Profile Bookmarklet settings admin bar', 'bp-bookmarklet' ),
-						'href'   => trailingslashit( bp_loggedin_user_domain() . bp_get_settings_slug() ) . $this->slug,
-					);
-
-					return $settings_nav;
-				} );
+				add_filter( 'bp_settings_admin_nav', array( $this, 'setup_settings_admin_bar' ), 10, 1 );
 			}
 		}
 
 		parent::setup_admin_bar( $wp_admin_nav );
+	}
+
+	/**
+	 * Add a new WP Admin Bar submenu to the Settings component
+	 *
+	 * @since 3.0.0
+	 */
+	public function setup_settings_admin_bar( $wp_admin_nav = array() ) {
+		$wp_admin_nav[] =  array(
+			'parent' => 'my-account-' . buddypress()->settings->id,
+			'id'     => 'my-account-' . $this->id,
+			'title'  => _x( 'Bookmarklet', 'Profile Bookmarklet settings admin bar', 'bp-bookmarklet' ),
+			'href'   => trailingslashit( bp_loggedin_user_domain() . bp_get_settings_slug() ) . $this->slug,
+		);
+
+		return $wp_admin_nav;
 	}
 
 	/**

@@ -124,6 +124,7 @@ final class BP_Bookmarklet {
 	 */
 	private function setup_hooks() {
 		if ( $this->bail() ) {
+			// Display a warning
 			add_action( $this->is_network_active() ? 'network_admin_notices' : 'admin_notices', array( $this, 'warnings' ) );
 
 		// load the plugin.
@@ -133,6 +134,7 @@ final class BP_Bookmarklet {
 
 			// Register css & js
 			add_action( 'bp_bookmarklet_frame_head',   array( $this, 'register_cssjs' ),  1 );
+			add_action( 'bp_bookmarklet_frame_head',   'wp_site_icon',                   20 );
 			add_action( 'bp_bookmarklet_frame_footer', 'wp_print_footer_scripts',        20 );
 
 			// Set and locate the Bookmarklet Frame
@@ -155,7 +157,7 @@ final class BP_Bookmarklet {
 	 */
 	public function is_network_active() {
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			return false;
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		}
 
 		return is_plugin_active_for_network( $this->basename );
