@@ -175,7 +175,7 @@ function bp_bookmarklet_register_activity_actions() {
 		'id'              => 'bookmark_published',
 		'admin_filter'    => __( 'Bookmarked a site', 'bp-bookmarklet' ),
 		'format_callback' => 'bp_bookmarklet_format_activity_action_published',
-		'front_filter'    => __( 'New Bookmarks', 'bp-bookmarklet' )
+		'front_filter'    => __( 'Bookmarks', 'bp-bookmarklet' )
 	);
 
 	bp_activity_set_action(
@@ -184,7 +184,8 @@ function bp_bookmarklet_register_activity_actions() {
 		$activity_params['admin_filter'],
 		$activity_params['format_callback'],
 		$activity_params['front_filter'],
-		array( 'activity', 'member' )
+		array( 'activity', 'member' ),
+		100
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
@@ -194,7 +195,8 @@ function bp_bookmarklet_register_activity_actions() {
 			$activity_params['admin_filter'],
 			$activity_params['format_callback'],
 			$activity_params['front_filter'],
-			array( 'group' )
+			array( 'group' ),
+			100
 		);
 	}
 }
