@@ -498,14 +498,14 @@ window.bp = window.bp || {};
 			var reset = new bp.Views.ActivityInput( {
 				type:  'reset',
 				id:    'bp-bookmarklet-reset-button',
-				value: 'Cancel'
+				value: BP_Bookmarklet.strings.cancelText
 			} );
 
 			var submit = new bp.Views.ActivityInput( {
 				type:  'submit',
 				id:    'bp-bookmarklet-submit-button',
 				name:  'bp-bookmarklet-submit-button',
-				value: 'Post Update'
+				value: BP_Bookmarklet.strings.submitText
 			} );
 
 			this.views.add( submit );

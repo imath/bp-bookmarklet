@@ -152,6 +152,8 @@ function bp_bookmarklet_enqueue_form() {
 	$params['objects'] = apply_filters( 'bp_bookmarklet_objects', $objects );
 
 	$strings = array(
+		'submitText'          => __( 'Publish', 'bp-bookmarklet' ),
+		'cancelText'          => __( 'Cancel', 'bp-bookmarklet' ),
 		'textareaPlaceholder' => sprintf( __( "What's new, %s?", 'bp-bookmarklet' ), bp_get_user_firstname( $user_displayname ) ),
 		'textareaLabel'       => __( 'Post what\'s new', 'bp-bookmarklet' ),
 		'errorGeneric'        => __( 'Error: the bookmark cannot be published.', 'bp-bookmarklet' ),

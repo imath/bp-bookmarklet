@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BP BookMarklet 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bp-bookmarklet\n"
-"POT-Creation-Date: 2016-03-23 17:16:01+00:00\n"
-"PO-Revision-Date: 2016-03-23 19:45+0100\n"
+"POT-Creation-Date: 2016-03-23 19:02:02+00:00\n"
+"PO-Revision-Date: 2016-03-23 20:02+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -84,56 +84,64 @@ msgid "Start typing the group name..."
 msgstr "Commencez à saisir un nom de groupe..."
 
 #: includes/functions.php:155
+msgid "Publish"
+msgstr "Publier"
+
+#: includes/functions.php:156
+msgid "Cancel"
+msgstr "Annuler"
+
+#: includes/functions.php:157
 msgid "What's new, %s?"
 msgstr "Quoi de neuf, %s ?"
 
-#: includes/functions.php:156
+#: includes/functions.php:158
 msgid "Post what's new"
 msgstr "Publiez de vos nouvelles"
 
-#: includes/functions.php:157
+#: includes/functions.php:159
 msgid "Error: the bookmark cannot be published."
 msgstr "Erreur: le signet ne peut être publié."
 
-#: includes/functions.php:158
+#: includes/functions.php:160
 msgid "Error: the bookmark cannot be published for the selected item."
 msgstr "Erreur: le signet ne peut être publié dans le groupe sélectionné."
 
-#: includes/functions.php:176
+#: includes/functions.php:178
 msgid "Bookmarked a site"
 msgstr "Ajouter un site aux signets"
 
-#: includes/functions.php:178
+#: includes/functions.php:180
 msgid "Bookmarks"
 msgstr "Signets"
 
-#: includes/functions.php:223 includes/functions.php:478
+#: includes/functions.php:225 includes/functions.php:480
 msgid "%1$s bookmarked a new site in the group %2$s"
 msgstr "%1$s a ajouté un nouveau site aux signets du groupe %2$s"
 
-#: includes/functions.php:228 includes/functions.php:460
+#: includes/functions.php:230 includes/functions.php:462
 msgid "%s bookmarked a new site"
 msgstr "%s a ajouté un nouveau site à ses signets"
 
-#: includes/functions.php:408
+#: includes/functions.php:410
 msgid "No items were found."
 msgstr "Désolé, aucun élément disponible."
 
-#: includes/functions.php:424
+#: includes/functions.php:426
 msgid "There was a problem publishing your bookmark. Please try again."
 msgstr ""
 "Une erreur s&#39.est produite lors de la publication de votre signet. "
 "Veuillez recommencer."
 
-#: includes/functions.php:464
+#: includes/functions.php:466
 msgid "To publish a bookmark in this group, you must be a member of it."
 msgstr "Pour publier un signer dans ce groupe, vous devez en être membre."
 
-#: includes/functions.php:483
+#: includes/functions.php:485
 msgid "Unknown group"
 msgstr "Groupe Inconnu"
 
-#: includes/functions.php:511
+#: includes/functions.php:513
 msgid "Success! Bookmark published."
 msgstr "Succès: le signet a été publié."
 
