@@ -398,7 +398,7 @@ function bp_bookmarklet_get_items() {
 			'user_id'           => bp_loggedin_user_id(),
 			'search_terms'      => $_POST['search'],
 			'show_hidden'       => true,
-			'per_page'          => 2,
+			'per_page'          => 5,
 		) );
 
 		wp_send_json_success( array_map( 'bp_bookmarklet_prepare_item_js', $groups['groups'] ) );

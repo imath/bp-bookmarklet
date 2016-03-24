@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BP BookMarklet
  * Plugin URI: http://imathi.eu/tag/bp-bookmarklet/
- * Description: Allows your member to add a bookmarklet to their browser to bookmark sites in your BuddyPress powered community
+ * Description: Let the members of your BuddyPress powered community add a Bookmarklet to their browser to share interesting web pages
  * Version: 3.0.0
  * Requires at least: 4.4
  * Tested up to: 4.5

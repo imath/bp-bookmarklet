@@ -2,29 +2,24 @@
 Contributors: imath
 Donate link: http://imathi.eu/donations/
 Tags: BuddyPress, activity, bookmarklet, share, links, members
-Requires at least: 3.5.1
-Tested up to: 3.6
-Stable tag: 2.0.2
+Requires at least: 4.4
+Tested up to: 4.5
+Stable tag: 3.0.0
 License: GPLv2
 
-Allows your member to add a bookmarklet to their browser to easily share links in your BP community
+Let the members of your BuddyPress powered community add a Bookmarklet to their browser to share interesting web pages
 
 == Description ==
-BP BookMarklet allows your members to add a bookmarklet to their browser to easily share links in your BuddyPress powered community.
 
-Members can find the bookmarklet alternatively in their profile header or in a sidebar widget if the super administrator activated it. They just need to drag it to the bookmark toolbar of their browser.
-Then, while surfing on websites, they can use this bookmarklet to directly share links to the active page into the BuddyPress community.
+Members will find their bookmarklet within a sub menu of their profile's Account Settings if the BuddyPress Settings component is active, else a new profile navigation will be created by the plugin. From this settings page, members can drag the bookmarklet within their browser's bookmarks bar.
 
-The title, url and the selected text of the page will be included in the activity content
+Then sharing any internet pages in their activity stream or in a specific group's activity stream can be achieved simply by clicking on this bookmarklet!
 
-Since version 2.0 of the plugin, a member can automatically attach one of the image of the page to the content of the activity.
+A popup window will help them set their preferences about the activity to publish.
 
-<strong>NB</strong> : Since version 2.0, this plugin requires at least BuddyPress 1.7.
+<strong>NB</strong>: Since version 3.0.0, this plugin requires at least BuddyPress 2.5 and WordPress 4.4.
 
 This plugin is available in french and english.
-
-Watch the demo !
-http://vimeo.com/67003439
 
 == Installation ==
 
@@ -40,9 +35,16 @@ Please add a comment <a href="http://imathi.eu/tag/bp-bookmarklet/">here</a>
 
 == Screenshots ==
 
-1. window to share your content in activity stream.
+1. window to share bookmarks in activity streams.
 
 == Changelog ==
+
+= 3.0.0 =
+* Completely rewritten!
+* Now uses the WordPress "Press This" class to get informations about the Page (eg: images, description, ..)
+* Uses the embed code if the webpage is embeddable within the BuddyPress Activity stream
+* Backbone & Underscore to the rescue for a revamped Activity Post Form UI.
+* Bookmarks can be filtered using the activity dropdown filters (Administration Screen/Directory/Profiles & Groups)
 
 = 2.0.2 =
 * corrects a bug : after the use of the bookmarklet, the image attached to it was also attached to each activity post during the same session
@@ -50,7 +52,7 @@ Please add a comment <a href="http://imathi.eu/tag/bp-bookmarklet/">here</a>
 = 2.0.1 =
 * corrects a bug : now the attach image checkbox is only loaded in the bookmarklet page
 
-= 2.0 = 
+= 2.0 =
 * brings BuddyPress 1.7 compatibility
 * adds the ability to attach one of the images of the link into the activity content
 
@@ -63,6 +65,9 @@ Please add a comment <a href="http://imathi.eu/tag/bp-bookmarklet/">here</a>
 * BP BookMarklet can run on BP 1.5.x and BP 1.2.x
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+Requires (at least) WordPress 4.4 & BuddyPress 2.5. Users will need to add the new bookmarklet and remove the older one.
 
 = 2.0.2 =
 Requires at least BuddyPress 1.7.
