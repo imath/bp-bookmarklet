@@ -535,7 +535,10 @@ function bp_bookmarklet_output_bookmark() {
 		global $activities_template;
 
 		add_filter( 'bp_activity_maybe_truncate_entry', '__return_false' );
-		$output = apply_filters_ref_array( 'bp_get_activity_content_body', array( $activities_template->activity->content, &$activities_template->activity ) );
+		$output = sprintf( '<div class="%1$s">%2$s</div>',
+			apply_filters( 'bp_bookmarklet_output_bookmark_container_class', 'activity-inner' ),
+			apply_filters_ref_array( 'bp_get_activity_content_body', array( $activities_template->activity->content, &$activities_template->activity ) )
+		);
 		remove_filter( 'bp_activity_maybe_truncate_entry', '__return_false' );
 
 		echo apply_filters( 'bp_bookmarklet_output_bookmark', $output );
