@@ -594,7 +594,7 @@ function bp_bookmarklet_get_bookmark( $activity_id ) {
 				$output_three = '<p class="description">' . esc_html( $description ) . '</p>';
 			}
 
-			$output = sprintf( '<div class="bookmarklet-inner">%1$s%2$s%3$s</div>',
+			$output = sprintf( '<div class="bookmarklet-inner activity-inner">%1$s%2$s%3$s</div>',
 				$output_one,
 				$output_two,
 				$output_three
