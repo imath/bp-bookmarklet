@@ -666,6 +666,35 @@ add_filter( 'bp_get_activity_content_body',      'bp_bookmarklet_prepend_bookmar
 add_filter( 'bp_activity_admin_comment_content', 'bp_bookmarklet_prepend_bookmarklet', 2, 2 );
 
 /**
+ * Make sure the 'mini' classes is not added to the 'bookmark_published' activities
+ * having no content.
+ *
+ * @since 3.0.1
+ */
+function bp_bookmarklet_activity_css_class( $classes = '' ) {
+	if ( 'bookmark_published' !== bp_get_activity_type() || bp_activity_has_content() ) {
+		return $classes;
+	}
+
+	$array_classes = explode( ' ', $classes );
+
+	if ( ! is_array( $array_classes ) || false === array_search( 'mini', $array_classes ) ) {
+		return $classes;
+	}
+
+	/**
+	 * Filter here to edit the Bookmark activity css classes
+	 *
+	 * @since 3.0.1
+	 *
+	 * @param string $value   The specific classes for a Bookmark activity.
+	 * @param string $classes The original classes.
+	 */
+	return apply_filters( 'bp_bookmarklet_activity_css_class', join( ' ', array_diff( $array_classes, array( 'mini' ) ) ), $classes );
+}
+add_filter( 'bp_get_activity_css_class', 'bp_bookmarklet_activity_css_class', 10, 1 );
+
+/**
  * Add an inline style in activity streams
  *
  * @since  3.0.0
