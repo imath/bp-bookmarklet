@@ -496,6 +496,11 @@ function bp_bookmarklet_post_update() {
 		wp_send_json_error( $response );
 	}
 
+	// Update the Group's latest activity if needed
+	if ( ! empty( $group->id ) ) {
+		groups_update_last_activity( $group->id );
+	}
+
 	$r['url'] = esc_url_raw( $r['url'] );
 	$bookmarklet_data = $r['url'];
 
