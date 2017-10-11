@@ -2,6 +2,9 @@
 /**
  * Bookmarklet Page parser
  *
+ * It's a copy of the one extending WP_Press_This but it now
+ * extends WP_Press_This_Plugin (Since Press This was removed in 4.9).
+ *
  * @package BP Bookmarklet
  * @subpackage Class
  */
@@ -9,15 +12,15 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( class_exists( 'WP_Press_This' ) ) :
+if ( class_exists( 'WP_Press_This_Plugin' ) ) :
 /**
  * Site Image/Site metas Parser class.
  *
- * Extends WP_Press_This.
+ * Extends WP_Press_This_Plugin.
  *
- * @since 3.0.0
+ * @since 3.1.0
  */
-class BP_Bookmarklet_This extends WP_Press_This {
+class BP_Bookmarklet_This extends WP_Press_This_Plugin {
 	public function __construct() {}
 
 	public function fetch_source_html( $url ) {

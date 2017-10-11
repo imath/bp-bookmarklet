@@ -322,10 +322,28 @@ function bp_bookmarklet_fetch_link() {
 	// No oembed, so let's fetch some data about the link
 	} else {
 		if ( ! class_exists( 'WP_Press_This' ) ) {
-			require( ABSPATH . 'wp-admin/includes/class-wp-press-this.php' );
-		}
+			// Try WordPress for versions < 4.9
+			if ( file_exists( ABSPATH . 'wp-admin/includes/class-wp-press-this.php' ) ) {
+				require ABSPATH . 'wp-admin/includes/class-wp-press-this.php';
+				require_once bp_bookmarklet()->includes_dir . 'class.php';
 
-		require_once( bp_bookmarklet()->includes_dir . 'class.php' );
+			// Try the Plugin for WordPress 4.9 and up.
+			} elseif ( is_plugin_active( 'press-this/press-this-plugin.php' ) ) {
+				require WP_PLUGIN_DIR . '/press-this/class-wp-press-this-plugin.php';
+				require_once bp_bookmarklet()->includes_dir . 'plugin-class.php';
+
+			// WordPress is 4.9 or Up and the Press This plugin is not available
+			} else {
+				wp_send_json_success( array(
+					'type'        => 'link',
+					'url'         => $url,
+					'title'       => $url,
+					'description' => '',
+					'images'      => array(),
+					'fetching'    => false
+				) );
+			}
+		}
 
 		$link = new BP_Bookmarklet_This;
 		$data = $link->source_data_fetch_fallback( $url );

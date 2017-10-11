@@ -3,7 +3,7 @@
  * Plugin Name: BP BookMarklet
  * Plugin URI: http://imathi.eu/tag/bp-bookmarklet/
  * Description: Let the members of your BuddyPress powered community add a Bookmarklet to their browser to share interesting web pages
- * Version: 3.0.0
+ * Version: 3.1.0
  * Requires at least: 4.4
  * Tested up to: 4.5
  * License: GNU/GPL 2
@@ -52,12 +52,14 @@ final class BP_Bookmarklet {
 
 		/** Version ***********************************************************/
 
-		$this->version = '3.0.0';
+		$this->version = '3.1.0';
 
 		$this->required_versions = array(
 			'wp' => 4.4,
 			'bp' => 2.5
 		);
+
+		$this->needs_press_this_plugin = false;
 
 		/** Paths *************************************************************/
 
@@ -97,6 +99,12 @@ final class BP_Bookmarklet {
 		}
 
 		if ( $this->required_versions['wp'] > $this->wp_version || $this->required_versions['bp'] > (float) bp_get_version() || ! bp_is_active( 'activity') ) {
+			$return = true;
+		}
+
+		// WordPress is 4.9! No need to carry on, Press This is not available.
+		if ( $this->wp_version <= 4.9 && ! function_exists( 'press_this_tool_box' ) ) {
+			$this->needs_press_this_plugin = true;
 			$return = true;
 		}
 
@@ -170,6 +178,10 @@ final class BP_Bookmarklet {
 	 */
 	public function warnings() {
 		$warnings = array();
+
+		if ( ! empty( $this->needs_press_this_plugin ) ) {
+			$warnings[] = esc_html__( 'Since version 4.9 of WordPress, BP Bookmarklet requires the "Press This" plugin.', 'bp-bookmarklet' );
+		}
 
 		if ( $this->required_versions['wp'] > $this->wp_version ) {
 			$warnings[] = sprintf(
@@ -348,4 +360,3 @@ function bp_bookmarklet() {
 	return BP_Bookmarklet::instance();
 }
 add_action( 'bp_include', 'bp_bookmarklet' );
-
