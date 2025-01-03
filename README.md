@@ -1,9 +1,9 @@
 BP Bookmarklet
 ==============
 
-Let the members of your BuddyPress powered community add a Bookmarklet to their browser to share interesting web pages.
+This WP/BP Plugin is no more supported and this repository is now archived.
 
-![Bookmarklet Window](https://c2.staticflickr.com/2/1441/25738574480_1609aef4cf_o.png)
+Let the members of your BuddyPress powered community add a Bookmarklet to their browser to share interesting web pages.
 
 
 Required Configuration
